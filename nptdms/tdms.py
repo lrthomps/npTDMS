@@ -371,8 +371,11 @@ class _TdmsSegment(object):
 
         if self.toc['kTocDAQmxRawData']:
             # chunks defined differently for DAQmxRawData format
-            data_size = self.ordered_objects[0].number_values \
-                * self.ordered_objects[0].raw_data_width
+            for i in range(len(self.ordered_objects)):
+                data_size = self.ordered_objects[i].number_values \
+                    * self.ordered_objects[i].raw_data_width
+                if data_size>0:
+                    break
         else:
             data_size = sum([
                 o.data_size
